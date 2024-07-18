@@ -14,14 +14,11 @@
  */
 var rangeSumBST = function(root, low, high) {
     let sum = 0;
-
-    const getSum = function(node){
-        if(!node) return;
-        if(node.val >= low && node.val <= high) sum+= node.val;
-        if(node.left) getSum(node.left);
-        if(node.right) getSum(node.right);
-    }
     
-    getSum(root);
+    if(!root) return;
+    if(root.val >= low && root.val <= high) sum += root.val;
+    if(root.left) sum += rangeSumBST(root.left, low, high);
+    if(root.right) sum += rangeSumBST(root.right, low, high);
+
     return sum;
 };
